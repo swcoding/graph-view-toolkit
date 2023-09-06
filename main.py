@@ -51,6 +51,8 @@ def has_link_to_other_file(filepath_a, filepath_b):
     return False
 
 def generate_nx_graph(target_dir):
+
+    # get md links
     mdfiles = [f for f in os.listdir(target_dir) if f.split(".")[-1] == "md"]
     mdlinks = []
     for a, b in all_subsets(mdfiles):
@@ -58,8 +60,12 @@ def generate_nx_graph(target_dir):
         b_path = os.path.join(target_dir, b)
         if has_link_to_other_file(a_path, b_path):
             mdlinks.append((a,b))
+
+    
+    # generate files
+    mdfiles_drop_suffix = [f.replace(".md", "") for f in mdfiles]
     graph = nx.DiGraph()
-    for node in mdfiles:
+    for node in mdfiles_drop_suffix:
         graph.add_node(node)
     for a,b in mdlinks:
         graph.add_edge(a, b)
