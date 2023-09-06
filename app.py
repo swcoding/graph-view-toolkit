@@ -20,6 +20,8 @@ import zipfile
 import os
 from main import main  # 將 "your_script" 替換為你的Python檔案名稱（不包含.py）
 
+
+
 # 創建一個暫存資料夾來保存png檔案
 temp_folder = 'temp_folder'
 
@@ -28,6 +30,10 @@ st.title("Graph View toolkit for Heptabase cards")
 
 # 上傳zip檔案
 uploaded_file = st.file_uploader("Upload Your zipfile of markdown files", type="zip")
+
+# Initialization
+if 'count' not in st.session_state:
+	st.session_state.count = 0
 
 # 按下執行按鈕後的操作
 if st.button("Generate graph view!"):
@@ -66,3 +72,7 @@ if st.button("Generate graph view!"):
                         st.error(f"刪除暫存檔案時出現錯誤：{str(e)}")
                 os.rmdir(temp_folder)
                 # st.info("暫存資料夾已刪除")
+            
+            st.session_state.count += 1
+
+st.write("Uploaded Zip files: ", st.session_state.count)
