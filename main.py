@@ -84,11 +84,11 @@ def extract_zip_to_temp_folder(zip_path):
 def main(target_dir, filename):
 
     import matplotlib.pyplot as plt
-    font_path = '/Users/jefferywang/Desktop/Things/src/source-han-serif-1.001R/OTC/SourceHanSerif-Medium.ttc'  # 將路徑替換為實際的字體文件路徑
+    # font_path = '/Users/jefferywang/Desktop/Things/src/source-han-serif-1.001R/OTC/SourceHanSerif-Medium.ttc'  # 將路徑替換為實際的字體文件路徑
 
     # 設定中文字體
-    from matplotlib.font_manager import fontManager
-    fontManager.addfont(font_path)
+    # from matplotlib.font_manager import fontManager
+    # fontManager.addfont(font_path)
     plt.figure(figsize=(16,10))
 
     
@@ -100,7 +100,7 @@ def main(target_dir, filename):
     random_pos = nx.random_layout(g, seed=42)
     pos = nx.spring_layout(g, pos=random_pos)  # 選擇一個佈局方式
     nx.draw_networkx(g, pos, with_labels=False, node_size=100, node_color='skyblue', edge_color="black")
-    nx.draw_networkx_labels(g, pos=pos, verticalalignment="top", horizontalalignment="center", font_family="Source Han Serif")
+    nx.draw_networkx_labels(g, pos=pos, verticalalignment="top", horizontalalignment="center")
     
     output_png_path = f"{target_dir}/{filename.replace('.zip', '')}.png"
     plt.savefig(output_png_path, format="png")

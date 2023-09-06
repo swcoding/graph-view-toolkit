@@ -1,0 +1,24 @@
+# https://dev.to/whitphx/how-to-deploy-streamlit-apps-to-google-app-engine-407o
+# runtime: custom
+# env: flex # streamlit use websocket, so should use flex env
+
+# # runtime_config:
+# #   python_version: 3.8
+
+# # entrypoint: streamlit run streamlit-app.py --server.port $PORT
+
+# # if using file_uploader, max_num_instances must be 1
+# automatic_scaling:
+#   max_num_instances: 1 
+
+
+# https://discuss.streamlit.io/t/deploy-streamlit-apps-on-gcp-app-engine-without-docker/39212/2
+runtime: python
+env: flex
+runtime_config:
+  operating_system: "ubuntu18"
+  runtime_version: "3.8"
+entrypoint: streamlit run --server.port=8080 --server.address=0.0.0.0 --server.enableCORS=false --server.enableWebsocketCompression=false --server.enableXsrfProtection=false --server.headless=true app.py
+
+network:
+  session_affinity: true
