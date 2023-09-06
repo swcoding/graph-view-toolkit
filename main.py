@@ -63,7 +63,6 @@ def generate_nx_graph(target_dir):
 
     
     # generate files
-    # mdfiles_drop_suffix = [f.replace(".md", "") for f in mdfiles]
     graph = nx.DiGraph()
     for node in mdfiles:
         graph.add_node(node)
