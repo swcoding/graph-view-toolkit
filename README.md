@@ -1,6 +1,6 @@
 # graph-view-toolkit
 
-A simple toolkit to generate the interactive network graph of your Heptabase card.
+A simple streamlit playground to generate the interactive network graph of your Heptabase card.
 
 ## Usage
 1.  `git clone`
