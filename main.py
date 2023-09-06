@@ -1,6 +1,7 @@
 import re
 import os
 import networkx as nx
+from pyvis import network as net
 from itertools import combinations
 import tempfile
 import zipfile
@@ -17,7 +18,6 @@ def extract_links(text):
     return links
 
 def has_link_to_other_file(filepath_a, filepath_b):
-    
     
     # 读取文件A的内容
     with open(filepath_a, 'r', encoding='utf-8') as f:
@@ -96,15 +96,24 @@ def main(target_dir, filename):
     # target_dir = extract_zip_to_temp_folder(zip_file_path)
     g = generate_nx_graph(target_dir)
     
-    # plot
-    random_pos = nx.random_layout(g, seed=42)
-    pos = nx.spring_layout(g, pos=random_pos)  # 選擇一個佈局方式
-    nx.draw_networkx(g, pos, with_labels=False, node_size=100, node_color='skyblue', edge_color="black")
-    nx.draw_networkx_labels(g, pos=pos, verticalalignment="top", horizontalalignment="center")
+    # plot networkx
+    # random_pos = nx.random_layout(g, seed=42)
+    # pos = nx.spring_layout(g, pos=random_pos)  # 選擇一個佈局方式
+    # nx.draw_networkx(g, pos, with_labels=False, node_size=100, node_color='skyblue', edge_color="black")
+    # nx.draw_networkx_labels(g, pos=pos, verticalalignment="top", horizontalalignment="center")
     
-    output_png_path = f"{target_dir}/{filename.replace('.zip', '')}.png"
-    plt.savefig(output_png_path, format="png")
-    return output_png_path
+    # output_png_path = f"{target_dir}/{filename.replace('.zip', '')}.png"
+    # plt.savefig(output_png_path, format="png")
+    # return output_png_path
+
+    # plot pyvis network
+    pyvis_graph = net.Network(height='800px', width='100%',heading=filename)
+    pyvis_graph.from_nx(g)
+
+    output_html_path = f"{target_dir}/{filename.replace('.zip', '')}.html"
+    pyvis_graph.write_html(output_html_path)
+    return output_html_path
+
 
 if __name__ == "__main__":
     # filename = "生存的法則一.zip"

@@ -45,7 +45,11 @@ if st.button("Generate graph view!"):
             main_result = main(temp_folder, uploaded_file.name)
 
             # 顯示生成的png檔案
-            st.image(main_result, caption=f'Graph View of {uploaded_file.name}', use_column_width=True)
+            # st.image(main_result, caption=f'Graph View of {uploaded_file.name}', use_column_width=True)
+
+            # display html file
+            with open(main_result, "r", encoding="utf-8") as html_file:
+                st.components.v1.html(html_file.read(), height=600)
 
         except Exception as e:
             st.error(f"執行過程中出現錯誤：{str(e)}")
