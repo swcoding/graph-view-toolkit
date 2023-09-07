@@ -18,6 +18,8 @@
 import streamlit as st
 import zipfile
 import os
+import shutil
+
 from main import main  # 將 "your_script" 替換為你的Python檔案名稱（不包含.py）
 
 
@@ -55,7 +57,7 @@ if st.button("Generate graph view!"):
 
             # display html file
             with open(main_result, "r", encoding="utf-8") as html_file:
-                st.components.v1.html(html_file.read(), height=600)
+                st.components.v1.html(html_file.read(), height=800)
 
         except Exception as e:
             st.error(f"執行過程中出現錯誤：{str(e)}")
@@ -70,7 +72,8 @@ if st.button("Generate graph view!"):
                             os.remove(file_path)
                     except Exception as e:
                         st.error(f"刪除暫存檔案時出現錯誤：{str(e)}")
-                os.rmdir(temp_folder)
+                # os.rmdir(temp_folder)
+                shutil.rmtree(temp_folder)
                 # st.info("暫存資料夾已刪除")
             
             st.session_state.count += 1
